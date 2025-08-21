@@ -7,6 +7,7 @@
  */
 
 import Cocoa
+import UniformTypeIdentifiers
 
 
 
@@ -99,7 +100,7 @@ final class FilesListViewController : NSViewController, NSTableViewDataSource, N
 		let openPanel = NSOpenPanel()
 		
 		openPanel.canChooseFiles = true
-		openPanel.allowedFileTypes = ["lcm"]
+		openPanel.allowedContentTypes = [UTType("com.xcode-actions.LocMapper.LocFile")!]
 		openPanel.canChooseDirectories = false
 		
 		openPanel.beginSheetModal(for: view.window!, completionHandler: { response in
