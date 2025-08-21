@@ -145,7 +145,7 @@ final class FilesListViewController : NSViewController, NSTableViewDataSource, N
 		let row = tableView.row(for: textField) /* Note: O(n)… */
 		guard row >= 0 else {return}
 		
-		filesDescriptions[row].nickname = textField.stringValue
+		filesDescriptions[row] = filesDescriptions[row].withNickname(textField.stringValue)
 		saveFileList()
 	}
 	
@@ -154,7 +154,7 @@ final class FilesListViewController : NSViewController, NSTableViewDataSource, N
 		let row = tableView.row(for: menuButton) /* Note: O(n)… */
 		guard row >= 0 else {return}
 		
-		filesDescriptions[row].refLocType = InputFileDescription.RefLocType(rawValue: menuButton.selectedTag()) ?? .xibRefLoc
+		filesDescriptions[row] = filesDescriptions[row].withRefLocType(.init(rawValue: menuButton.selectedTag()) ?? .xibRefLoc)
 		saveFileList()
 	}
 	

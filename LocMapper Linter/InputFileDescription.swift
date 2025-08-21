@@ -10,7 +10,7 @@ import Foundation
 
 
 
-final class InputFileDescription : NSObject, NSSecureCoding {
+final class InputFileDescription : NSObject, NSSecureCoding, Sendable {
 	
 	static let supportsSecureCoding: Bool = true
 	
@@ -22,18 +22,33 @@ final class InputFileDescription : NSObject, NSSecureCoding {
 		
 	}
 	
-	var nickname: String?
+	let nickname: String?
 	
 	let url: URL
 	let urlBookmarkData: Data
 	
-	var refLocType = RefLocType.xibRefLoc
+	let refLocType: RefLocType
 	
-	init(url u: URL) throws {
-		url = u
-		urlBookmarkData = try u.bookmarkData()
+	convenience init(url: URL) throws {
+		self.init(url: url, urlBookmarkData: try url.bookmarkData(), nickname: nil, refLocType: .xibRefLoc)
+	}
+	
+	private init(url: URL, urlBookmarkData: Data, nickname: String?, refLocType: RefLocType) {
+		self.url = url
+		self.urlBookmarkData = urlBookmarkData
+		
+		self.nickname = nickname
+		self.refLocType = refLocType
 		
 		super.init()
+	}
+	
+	func withNickname(_ newNickname: String?) -> Self {
+		.init(url: url, urlBookmarkData: urlBookmarkData, nickname: newNickname, refLocType: refLocType)
+	}
+	
+	func withRefLocType(_ newRefLocType: RefLocType) -> Self {
+		.init(url: url, urlBookmarkData: urlBookmarkData, nickname: nickname, refLocType: newRefLocType)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
