@@ -1182,7 +1182,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1203,7 +1203,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1217,7 +1217,7 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 42;
 				EXECUTABLE_PREFIX = lib;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1231,7 +1231,7 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 42;
 				EXECUTABLE_PREFIX = lib;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1363,7 +1363,7 @@
 				CURRENT_PROJECT_VERSION = 42;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperCLI";
 				PRODUCT_MODULE_NAME = LocMapperCLI;
 				PRODUCT_NAME = locmapper;
@@ -1379,7 +1379,7 @@
 				CURRENT_PROJECT_VERSION = 42;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperCLI";
 				PRODUCT_MODULE_NAME = LocMapperCLI;
 				PRODUCT_NAME = locmapper;
@@ -1404,7 +1404,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperApp";
 				PRODUCT_MODULE_NAME = LocMapperApp;
 				PRODUCT_NAME = LocMapper;
@@ -1429,7 +1429,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapperApp";
 				PRODUCT_MODULE_NAME = LocMapperApp;
 				PRODUCT_NAME = LocMapper;
