@@ -81,7 +81,7 @@ final class FilesListViewController : NSViewController, NSTableViewDataSource, N
 	   MARK: - Text Field Delegate
 	   *************************** */
 	
-	nonisolated func didBecomeFirstResponder(_ textField: NSTextField) {
+	func didBecomeFirstResponder(_ textField: NSTextField) {
 		(view as? KeyEquivalentDisablingView)?.disableKeyEquivalent = true
 	}
 	

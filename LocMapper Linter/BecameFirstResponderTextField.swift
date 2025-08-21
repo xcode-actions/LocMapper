@@ -11,6 +11,7 @@ import AppKit
 
 
 @objc
+@MainActor
 protocol BecameFirstResponderTextFieldDelegate : NSTextFieldDelegate {
 	
 	@objc optional func didBecomeFirstResponder(_ textField: NSTextField)
