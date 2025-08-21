@@ -10,7 +10,7 @@ import Cocoa
 
 
 
-class LoadingDocViewController : NSViewController {
+final class LoadingDocViewController : NSViewController {
 	
 	@IBOutlet var activityIndicator: NSProgressIndicator!
 	

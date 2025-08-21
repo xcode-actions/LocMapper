@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate {
+final class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate {
 	
 	@IBOutlet var tableView: NSTableView!
 	
