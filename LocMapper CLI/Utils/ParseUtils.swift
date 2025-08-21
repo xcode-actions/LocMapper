@@ -49,7 +49,7 @@ func dictionaryOptionFromArray(_ array: [String], allowEmpty: Bool = false) thro
 }
 
 
-extension LocFile.MergeStyle : @retroactive ExpressibleByArgument {
+extension LocFile.MergeStyle : ExpressibleByArgument {
 	
 	public init?(argument: String) {
 		switch argument {

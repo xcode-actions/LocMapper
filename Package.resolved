@@ -1,5 +1,5 @@
 {
-  "originHash" : "ce5cec49fb4ae7e16ebc974a5f8aa9179fa4a9b7f47d0e21c02c84a5bf365453",
+  "originHash" : "76c7ac527971b73927b1fba22bb75a9d00cf60becc422411e3e4093acef02426",
   "pins" : [
     {
       "identity" : "cltlogger",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
-        "version" : "0.5.0"
+        "revision" : "309a47b2b1d9b5e991f36961c983ecec72275be3",
+        "version" : "1.6.1"
       }
     },
     {
