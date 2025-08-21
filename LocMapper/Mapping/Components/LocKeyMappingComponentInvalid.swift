@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocKeyMappingComponentInvalid : LocKeyMappingComponent {
+final class LocKeyMappingComponentInvalid : LocKeyMappingComponent {
 	
 	override class var serializedType: String {return "__invalid__"}
 	

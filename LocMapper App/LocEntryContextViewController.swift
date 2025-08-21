@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocEntryContextViewController: NSViewController {
+final class LocEntryContextViewController: NSViewController {
 	
 	@IBOutlet var labelGeneralInfo: NSTextField!
 	@IBOutlet var textViewContext: NSTextView!

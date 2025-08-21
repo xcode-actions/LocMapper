@@ -16,6 +16,7 @@ import zlib
 import CZlib
 #endif
 
+import GlobalConfModule
 import Logging
 
 
@@ -30,7 +31,7 @@ extension LocFile : TextOutputStreamable {
 	 Init from path.
 	 The metadata should be retrieved with the `unserializedMetadata(from:)` method.
 	 They are not read from the given path, it is the caller responsability to retrieve them by its own means. */
-	public convenience init(fromPath path: String, withCSVSeparator csvSep: String, metadata: Any? = nil) throws {
+	public convenience init(fromPath path: String, withCSVSeparator csvSep: String, metadata: [String: String]? = nil) throws {
 		var filecontent: String?
 		var encoding = String.Encoding.utf8
 		if FileManager.default.fileExists(atPath: path) {
@@ -42,7 +43,7 @@ extension LocFile : TextOutputStreamable {
 	/**
 	 Init with data file content.
 	 The metadata should be retrieved with the `unserializedMetadata(from:)` method. */
-	public convenience init(filecontent: Data, csvSeparator csvSep: String, metadata: Any?) throws {
+	public convenience init(filecontent: Data, csvSeparator csvSep: String, metadata: [String: String]?) throws {
 		guard let fileContentStr = String(data: filecontent, encoding: .utf8) else {
 			throw NSError(domain: "Migrator", code: 1, userInfo: [NSLocalizedDescriptionKey: "Cannot read file as UTF8."])
 		}
@@ -52,7 +53,7 @@ extension LocFile : TextOutputStreamable {
 	/**
 	 Init with file content.
 	 The metadata should be retrieved with the `unserializedMetadata(from:)` method. */
-	convenience init(filecontent: String, csvSeparator csvSep: String, metadata: Any?) throws {
+	convenience init(filecontent: String, csvSeparator csvSep: String, metadata: [String: String]?) throws {
 		let defaultError = NSError(domain: "Migrator", code: 2, userInfo: nil)
 		guard !filecontent.isEmpty else {
 			self.init(csvSeparator: csvSep)

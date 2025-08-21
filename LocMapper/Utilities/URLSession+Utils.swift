@@ -18,28 +18,34 @@ extension URLSession {
 	func synchronousDataTask(with request: URLRequest) throws -> (data: Data?, response: URLResponse?) {
 		let semaphore = DispatchSemaphore(value: 0)
 		
-		var responseData: Data?
-		var theResponse: URLResponse?
-		var theError: Error?
+		/* No, it’s not actually Sendable, but the way we use it it’s ok. */
+		final class ResponseHolder : @unchecked Sendable {
+			
+			var data: Data?
+			var urlResponse: URLResponse?
+			var error: Error?
+			
+		}
 		
+		let responseHolder = ResponseHolder()
 		dataTask(with: request) { data, response, error in
-			responseData = data
-			theResponse = response
-			theError = error
+			responseHolder.data = data
+			responseHolder.urlResponse = response
+			responseHolder.error = error
 			
 			semaphore.signal()
 		}.resume()
 		
 		_ = semaphore.wait(timeout: .distantFuture)
 		
-		if let error = theError {
+		if let error = responseHolder.error {
 			throw error
 		}
 		
 //		print("request: \(request.httpBody?.base64EncodedString())")
-//		print("data: \(responseData?.base64EncodedString())")
+//		print("data: \(responseHolder.data?.base64EncodedString())")
 		
-		return (data: responseData, response: theResponse)
+		return (data: responseHolder.data, response: responseHolder.urlResponse)
 	}
 	
 	func fetchData(request: URLRequest) -> Data? {

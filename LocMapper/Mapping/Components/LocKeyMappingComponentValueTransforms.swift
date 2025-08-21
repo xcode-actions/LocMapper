@@ -10,7 +10,7 @@ import Foundation
 
 
 
-public class LocKeyMappingComponentValueTransforms : LocKeyMappingComponent {
+public final class LocKeyMappingComponentValueTransforms : LocKeyMappingComponent {
 	
 	override class var serializedType: String {return "value_transforms"}
 	

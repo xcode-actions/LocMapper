@@ -16,8 +16,9 @@ private extension NSNib.Name {
 	
 }
 
-class UINavigationUtilities {
+final class UINavigationUtilities {
 	
+	@MainActor
 	static func createLoadingWindow() -> NSWindow {
 		var objects: NSArray?
 		Bundle.main.loadNibNamed(.loadingWindow, owner: nil, topLevelObjects: &objects)

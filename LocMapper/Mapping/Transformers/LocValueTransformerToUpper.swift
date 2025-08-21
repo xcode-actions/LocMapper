@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocValueTransformerToUpper : LocValueTransformer {
+final class LocValueTransformerToUpper : LocValueTransformer {
 	
 	override class var serializedType: String {return "to_upper"}
 	

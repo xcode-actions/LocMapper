@@ -21,14 +21,14 @@ private extension NSUserInterfaceItemIdentifier {
 }
 
 
-class TextFieldSelectableTableView : NSTableView {
+final class TextFieldSelectableTableView : NSTableView {
 	override func validateProposedFirstResponder(_ responder: NSResponder, for event: NSEvent?) -> Bool {
 		return responder is NSTextField || super.validateProposedFirstResponder(responder, for: event)
 	}
 }
 
 
-class LocFileDocFiltersViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+final class LocFileDocFiltersViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	
 	@IBOutlet var tableView: NSTableView!
 	

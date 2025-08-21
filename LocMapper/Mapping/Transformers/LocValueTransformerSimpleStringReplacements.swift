@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocValueTransformerSimpleStringReplacements : LocValueTransformer {
+final class LocValueTransformerSimpleStringReplacements : LocValueTransformer {
 	
 	override class var serializedType: String {return "simple_string_replacements"}
 	

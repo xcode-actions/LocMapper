@@ -32,7 +32,7 @@ private extension NSNib.Name {
 	
 }
 
-class LocFileDocument: NSDocument, NSTokenFieldDelegate {
+final class LocFileDocument : NSDocument, NSTokenFieldDelegate {
 	
 	/** If nil, the file is loading. */
 	var csvLocFile: LocFile? {
@@ -75,22 +75,26 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 	}
 	
 	override func write(to url: URL, ofType typeName: String) throws {
-		/* Let's save the UI state */
-		if let frameStr = mainWindowController?.window?.frameDescriptor {csvLocFile?.setMetadataValue(frameStr, forKey: "UIWindowFrame")}
-		else                                                            {csvLocFile?.removeMetadata(forKey: "UIWindowFrame")}
-		do {try csvLocFile?.setMetadataValue(mainViewController.uiState, forKey: "UIState")}
-		catch {
-			os_log("Cannot save UIState metadata", type: .info)
-		}
-		
-		/* We ask super to write the file.
-		 * In effect this will call the method below to get the data to write in the file, then write those data. */
-		try super.write(to: url, ofType: typeName)
-		
-		/* We still need to save the metadata which are not saved in the data (anymore; we used to save them along the data). */
-		guard let metadata = csvLocFile?.serializedMetadata() else {return}
-		metadata.withUnsafeBytes{ (ptr: UnsafeRawBufferPointer) -> Void in
-			setxattr(url.absoluteURL.path, xattrMetadataName, ptr.baseAddress!, metadata.count, 0 /* Reserved, should be 0 */, 0 /* No options */)
+		/* We assume the main actor because `canConcurrentlyReadDocuments(ofType:)` is `false`.
+		 * See also <https://forums.swift.org/t/70049>. */
+		try MainActor.assumeIsolated{
+			/* Let's save the UI state. */
+			if let frameStr = mainWindowController?.window?.frameDescriptor {csvLocFile?.setMetadataValue(frameStr, forKey: "UIWindowFrame")}
+			else                                                            {csvLocFile?.removeMetadata(forKey: "UIWindowFrame")}
+			do {try csvLocFile?.setMetadataValue(mainViewController.uiState, forKey: "UIState")}
+			catch {
+				os_log("Cannot save UIState metadata", type: .info)
+			}
+			
+			/* We ask super to write the file.
+			 * In effect this will call the method below to get the data to write in the file, then write those data. */
+			try super.write(to: url, ofType: typeName)
+			
+			/* We still need to save the metadata which are not saved in the data (anymore; we used to save them along the data). */
+			guard let metadata = csvLocFile?.serializedMetadata() else {return}
+			metadata.withUnsafeBytes{ (ptr: UnsafeRawBufferPointer) -> Void in
+				setxattr(url.absoluteURL.path, xattrMetadataName, ptr.baseAddress!, metadata.count, 0 /* Reserved, should be 0 */, 0 /* No options */)
+			}
 		}
 	}
 	
@@ -106,47 +110,55 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 	}
 	
 	override func read(from url: URL, ofType typeName: String) throws {
-		assert(unserializedMetadata == nil)
-		
-		if url.isFileURL {
-			let s = getxattr(url.absoluteURL.path, xattrMetadataName, nil, 0 /* Size */, 0 /* Reserved, should be 0 */, 0 /* No options */)
-			if s >= 0 {
-				/* We have the size of the xattr we want to read. Let's read it. */
-				var serializedMetadata = Data(count: s)
-				let s2 = serializedMetadata.withUnsafeMutableBytes{ (ptr: UnsafeMutableRawBufferPointer) -> Int in
-					return getxattr(url.absoluteURL.path, xattrMetadataName, ptr.baseAddress!, s, 0 /* Reserved, should be 0 */, 0 /* No options */)
+		/* We assume the main actor because `canConcurrentlyReadDocuments(ofType:)` is `false`.
+		 * See also <https://forums.swift.org/t/70049>. */
+		try MainActor.assumeIsolated{
+			assert(unserializedMetadata == nil)
+			
+			if url.isFileURL {
+				let s = getxattr(url.absoluteURL.path, xattrMetadataName, nil, 0 /* Size */, 0 /* Reserved, should be 0 */, 0 /* No options */)
+				if s >= 0 {
+					/* We have the size of the xattr we want to read. Let's read it. */
+					var serializedMetadata = Data(count: s)
+					let s2 = serializedMetadata.withUnsafeMutableBytes{ (ptr: UnsafeMutableRawBufferPointer) -> Int in
+						return getxattr(url.absoluteURL.path, xattrMetadataName, ptr.baseAddress!, s, 0 /* Reserved, should be 0 */, 0 /* No options */)
+					}
+					if s2 >= 0 {
+						/* We have read the xattr. Let's unserialize them! */
+						unserializedMetadata = LocFile.unserializedMetadata(from: serializedMetadata)
+					}
 				}
-				if s2 >= 0 {
-					/* We have read the xattr. Let's unserialize them! */
-					unserializedMetadata = LocFile.unserializedMetadata(from: serializedMetadata)
-				}
+				
+				windowFrameToRestore = unserializedMetadata?["UIWindowFrame"]
+				
+				let uiState = unserializedMetadata?["UIState"]
+				uiStateToRestore = uiState.flatMap{ (try? JSONSerialization.jsonObject(with: Data($0.utf8), options: [])) as? [String: Any] }
 			}
 			
-			windowFrameToRestore = (unserializedMetadata as? [String: Any?])?["UIWindowFrame"] as? String
-			
-			let uiState = (unserializedMetadata as? [String: Any?])?["UIState"] as? String
-			uiStateToRestore = uiState.flatMap{ (try? JSONSerialization.jsonObject(with: Data($0.utf8), options: [])) as? [String: Any] }
+			try super.read(from: url, ofType: typeName)
 		}
-		
-		try super.read(from: url, ofType: typeName)
 	}
 	
 	override func read(from data: Data, ofType typeName: String) throws {
-		/* Note: We may wanna move this in the read from url method (above) so
-		 *       the reading of the file is also done asynchronously to
-		 *       avoid blocking when big files or files on slow networks are opened. */
-		let metadata = unserializedMetadata
-		unserializedMetadata = nil
-		csvLocFile = nil
-		DispatchQueue.global(qos: .userInitiated).async{
-			do {
-				let locFile = try LocFile(filecontent: data, csvSeparator: ",", metadata: metadata)
-				DispatchQueue.main.async{ self.csvLocFile = locFile }
-			} catch {
-				DispatchQueue.main.async{
-					let alert = NSAlert(error: error as NSError)
-					alert.runModal()
-					self.close()
+		/* We assume the main actor because `canConcurrentlyReadDocuments(ofType:)` is `false`.
+		 * See also <https://forums.swift.org/t/70049>. */
+		MainActor.assumeIsolated{
+			/* Note:
+			 * We may wanna move this in the read from url method (above) so the reading of the file is also done asynchronously
+			 *  to avoid blocking when big files or files on slow networks are opened. */
+			let metadata = unserializedMetadata
+			unserializedMetadata = nil
+			csvLocFile = nil
+			DispatchQueue.global(qos: .userInitiated).async{
+				do {
+					let locFile = try LocFile(filecontent: data, csvSeparator: ",", metadata: metadata)
+					DispatchQueue.main.async{ self.csvLocFile = locFile }
+				} catch {
+					DispatchQueue.main.async{
+						let alert = NSAlert(error: error as NSError)
+						alert.runModal()
+						self.close()
+					}
 				}
 			}
 		}
@@ -194,9 +206,9 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 			self.windowForSheet?.beginSheet(loadingWindow, completionHandler: nil)
 			
 			let languages = tokenField.stringValue.split(separator: ",").map(String.init)
-			DispatchQueue.global().async {
+			DispatchQueue.global().async{
 				defer {
-					DispatchQueue.main.async {
+					DispatchQueue.main.async{
 						self.mainViewController.noteContentHasChanged()
 						self.windowForSheet?.endSheet(loadingWindow)
 						self.updateChangeCount(.changeDone)
@@ -207,7 +219,7 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 					let referenceTranslations = try XibRefLocFile(fromURL: url, languages: languages, csvSeparator: ",")
 					csvLocFile.mergeRefLocsWithXibRefLocFile(referenceTranslations, mergeStyle: .add)
 				} catch let error {
-					DispatchQueue.main.async {
+					DispatchQueue.main.async{
 						NSAlert(error: error as NSError).beginSheetModal(for: self.windowForSheet!, completionHandler: nil)
 					}
 				}
@@ -233,7 +245,7 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 		openPanel.beginSheetModal(for: windowForSheet!){ response in
 			assert(Thread.isMainThread)
 			
-			openPanel.accessoryView = nil /* Fixes a crash... (macOS 10.12 (16A239j) */
+			openPanel.accessoryView = nil /* Fixes a crash… (macOS 10.12 (16A239j) */
 			self.currentOpenPanel = nil
 			
 			guard response == .OK else {return}
@@ -315,7 +327,7 @@ class LocFileDocument: NSDocument, NSTokenFieldDelegate {
 	private let xattrMetadataName = "com.xcode-actions.LocMapperApp.LocFile.doc-metadata"
 	private var uiStateToRestore: [String: Any]?
 	private var windowFrameToRestore: String?
-	private var unserializedMetadata: Any?
+	private var unserializedMetadata: [String: String]?
 	
 	private var currentOpenPanel: NSOpenPanel?
 	

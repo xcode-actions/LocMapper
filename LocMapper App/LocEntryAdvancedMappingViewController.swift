@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocEntryAdvancedMappingViewController : NSViewController, NSTextDelegate {
+final class LocEntryAdvancedMappingViewController : NSViewController, NSTextDelegate {
 	
 	private(set) var dirty = false {
 		didSet {
@@ -32,7 +32,7 @@ class LocEntryAdvancedMappingViewController : NSViewController, NSTextDelegate {
 		textViewMapping.font = textViewMapping.font
 		textViewMapping.string = ""
 		
-		/* Apparently not read from xib... */
+		/* Apparently not read from xib… */
 		textViewMapping.isAutomaticSpellingCorrectionEnabled = false
 		textViewMapping.isAutomaticQuoteSubstitutionEnabled = false
 		textViewMapping.isAutomaticDashSubstitutionEnabled = false

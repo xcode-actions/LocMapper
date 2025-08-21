@@ -12,7 +12,7 @@ import Foundation
 
 
 /* Would be great to have an extender for that… */
-class ColorFixedTextFieldCell : NSTextFieldCell {
+final class ColorFixedTextFieldCell : NSTextFieldCell {
 	
 	var expectedTextColor: NSColor?
 	private var internalSet = false

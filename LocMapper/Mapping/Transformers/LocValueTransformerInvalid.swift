@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocValueTransformerInvalid : LocValueTransformer {
+final class LocValueTransformerInvalid : LocValueTransformer {
 	
 	override class var serializedType: String {return "__invalid__"}
 	

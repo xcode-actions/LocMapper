@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate {
+final class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate {
 	
 	@IBOutlet var tableView: NSTableView!
 	
@@ -28,7 +28,10 @@ class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidatio
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		createTableViewColumnsIfNeeded(reloadData: true)
+		/* <https://www.massicotte.org/awakefromnib> */
+		MainActor.assumeIsolated{
+			createTableViewColumnsIfNeeded(reloadData: true)
+		}
 	}
 	
 	/* *********************************************************************
@@ -128,7 +131,7 @@ class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidatio
 		guard let strValue = object as? String else {return}
 		_ = csvLocFile.setValue(strValue, forKey: key, withLanguage: tableColumn.identifier.rawValue)
 		
-		DispatchQueue.main.async {
+		DispatchQueue.main.async{
 			self.handlerNotifyDocumentModification?()
 			
 			tableView.beginUpdates()
@@ -336,7 +339,7 @@ class LocFileDocTableViewController : NSViewController, NSUserInterfaceValidatio
 	
 }
 
-class HighlightColorTextFieldCell : NSTextFieldCell {
+final class HighlightColorTextFieldCell : NSTextFieldCell {
 	
 	var hightlightColor: NSColor? {
 		didSet {

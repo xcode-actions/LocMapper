@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocFileDocFiltersSplitViewController : NSSplitViewController {
+final class LocFileDocFiltersSplitViewController : NSSplitViewController {
 	
 	@IBOutlet var splitItemFilters: NSSplitViewItem!
 	@IBOutlet var splitItemContent: NSSplitViewItem!

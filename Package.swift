@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.0
 import PackageDescription
 
 
@@ -14,9 +14,9 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/apple/swift-log.git",             from: "1.2.0"),
-		.package(url: "https://github.com/apple/swift-argument-parser.git", from: "0.3.0"),
-		.package(url: "https://github.com/Frizlab/XibLoc.git",              from: "1.0.0"),
-		.package(url: "https://github.com/xcode-actions/CLTLogger.git",     from: "0.5.1")
+		.package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.1"),
+		.package(url: "https://github.com/Frizlab/XibLoc.git",              from: "1.5.1-beta"),
+		.package(url: "https://github.com/xcode-actions/clt-logger.git",    from: "1.0.0-rc")
 	],
 	targets: [
 		.systemLibrary(name: "CZlib", path: "CZlib", providers: [.apt(["zlib1g-dev"])]),
@@ -37,7 +37,7 @@ let package = Package(
 			name: "locmapper",
 			dependencies: [
 				.product(name: "ArgumentParser", package: "swift-argument-parser"),
-				.product(name: "CLTLogger",      package: "CLTLogger"),
+				.product(name: "CLTLogger",      package: "clt-logger"),
 				.target(name: "LocMapper")
 			],
 			path: "LocMapper CLI",

@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocFileDocContentSplitViewController : NSSplitViewController {
+final class LocFileDocContentSplitViewController : NSSplitViewController {
 	
 	@IBOutlet var splitItemTableView: NSSplitViewItem!
 	@IBOutlet var splitItemLocEntry: NSSplitViewItem!

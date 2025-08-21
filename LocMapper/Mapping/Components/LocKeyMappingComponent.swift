@@ -11,11 +11,12 @@ import Foundation
 import os.log
 #endif
 
+import GlobalConfModule
 import Logging
 
 
 
-public class LocKeyMappingComponent {
+open class LocKeyMappingComponent {
 	
 	class var serializedType: String {
 		fatalError("serializedType is abstract.")

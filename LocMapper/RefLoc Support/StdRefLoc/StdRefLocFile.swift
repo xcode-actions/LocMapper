@@ -14,11 +14,12 @@ import FoundationNetworking
 import os.log
 #endif
 
+import GlobalConfModule
 import Logging
 
 
 
-public class StdRefLocFile {
+public final class StdRefLocFile {
 	
 	static let commonTagsMapping = [
 		"male_other": "gm",

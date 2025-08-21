@@ -11,6 +11,7 @@ import Foundation
 import os.log
 #endif
 
+import GlobalConfModule
 import Logging
 
 
@@ -248,9 +249,9 @@ public struct Std2Xib {
 		} else {
 			if taggedStrings.count != 1 {
 #if canImport(os)
-				Conf.oslog.flatMap{ os_log("Got more than one tagged string but no plural, gender or order tags in tagged strings %@ (key is %@)...", log: $0, type: .info, taggedStrings, keyForLogs ?? "unknown") }
+				Conf.oslog.flatMap{ os_log("Got more than one tagged string but no plural, gender or order tags in tagged strings %@ (key is %@)…", log: $0, type: .info, taggedStrings, keyForLogs ?? "unknown") }
 #endif
-				Conf.logger?.warning("Got more than one tagged string but no plural, gender or order tags...", metadata: ["tagged_strings": .array(taggedStrings.map{ "\($0)" }), "key": keyForLogs.flatMap{ "\($0)" }].compactMapValues{ $0 })
+				Conf.logger?.warning("Got more than one tagged string but no plural, gender or order tags…", metadata: ["tagged_strings": .array(taggedStrings.map{ "\($0)" }), "key": keyForLogs.flatMap{ "\($0)" }].compactMapValues{ $0 })
 			}
 			return taggedStrings.first!.value
 		}

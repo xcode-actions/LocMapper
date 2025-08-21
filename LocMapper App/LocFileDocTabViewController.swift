@@ -10,7 +10,7 @@ import Cocoa
 
 
 
-class LocFileDocTabViewController : NSTabViewController {
+final class LocFileDocTabViewController : NSTabViewController {
 	
 	@IBOutlet var tabViewItemDocContent: NSTabViewItem!
 	

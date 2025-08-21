@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocEntryViewController: NSTabViewController {
+final class LocEntryViewController: NSTabViewController {
 	
 	class LocEntry {
 		let lineKey: LocFile.LineKey

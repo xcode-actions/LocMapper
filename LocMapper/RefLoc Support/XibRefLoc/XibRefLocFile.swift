@@ -14,11 +14,12 @@ import FoundationNetworking
 import os.log
 #endif
 
+import GlobalConfModule
 import Logging
 
 
 
-public class XibRefLocFile {
+public final class XibRefLocFile {
 	
 	typealias Key = String
 	typealias Value = String

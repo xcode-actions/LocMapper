@@ -48,6 +48,7 @@
 		7B588827234F885E0038466E /* XibLoc in Frameworks */ = {isa = PBXBuildFile; productRef = 7B588826234F885E0038466E /* XibLoc */; };
 		7B58882B234F89430038466E /* XibLoc in Frameworks */ = {isa = PBXBuildFile; productRef = 7B58882A234F89430038466E /* XibLoc */; };
 		7B637D241C16DFC900C4BD7C /* LocFileDocContentSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B637D231C16DFC900C4BD7C /* LocFileDocContentSplitViewController.swift */; };
+		7B641D582E5761200051D351 /* AsyncOperations in Frameworks */ = {isa = PBXBuildFile; productRef = 7B641D572E5761200051D351 /* AsyncOperations */; };
 		7B6DBEDA21CC5B07007BBCE9 /* ColorFixedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6DBED921CC5B07007BBCE9 /* ColorFixedTextFieldCell.swift */; };
 		7B6E25A319D4157A001934ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E25A219D4157A001934ED /* main.swift */; };
 		7B6F19AB2576AB8700DB6F19 /* LokaliseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F19AA2576AB8700DB6F19 /* LokaliseKey.swift */; };
@@ -294,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B641D582E5761200051D351 /* AsyncOperations in Frameworks */,
 				7B0ACEFE21C30CD6003705A8 /* libLocMapper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,6 +757,7 @@
 			);
 			name = "LocMapper Linter";
 			packageProductDependencies = (
+				7B641D572E5761200051D351 /* AsyncOperations */,
 			);
 			productName = "LocMapper Linter";
 			productReference = 7B15CE1C21C120310016D109 /* LocMapper Linter.app */;
@@ -852,7 +855,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = happn;
 				TargetAttributes = {
 					7B15CE1B21C120310016D109 = {
@@ -892,7 +895,8 @@
 			);
 			mainGroup = 7B6E259619D4157A001934ED;
 			packageReferences = (
-				7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */,
+				7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */,
+				7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */,
 				7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				7B11B558246B179100257726 /* XCRemoteSwiftPackageReference "swift-log" */,
 				7B588825234F885E0038466E /* XCRemoteSwiftPackageReference "XibLoc" */,
@@ -1124,7 +1128,10 @@
 				CODE_SIGN_ENTITLEMENTS = "LocMapper Linter/LocMapper Linter.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "LocMapper Linter/LocMapperLinter-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1146,7 +1153,10 @@
 				CODE_SIGN_ENTITLEMENTS = "LocMapper Linter/LocMapper Linter.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = "LocMapper Linter/LocMapperLinter-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1284,9 +1294,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILDING_FROM_XCODEPROJ DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1337,9 +1348,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BUILDING_FROM_XCODEPROJ;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -1382,7 +1395,9 @@
 				CODE_SIGN_ENTITLEMENTS = "LocMapper App/LocMapper App.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 41;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				INFOPLIST_FILE = "LocMapper App/LocMapperApp-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1405,7 +1420,9 @@
 				CODE_SIGN_ENTITLEMENTS = "LocMapper App/LocMapper App.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 41;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				INFOPLIST_FILE = "LocMapper App/LocMapperApp-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1494,7 +1511,15 @@
 			repositoryURL = "https://github.com/Frizlab/XibLoc.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = "1.5.1-beta";
+			};
+		};
+		7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Frizlab/AsyncOperations.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
 			};
 		};
 		7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
@@ -1502,15 +1527,15 @@
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 1.6.1;
 			};
 		};
-		7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */ = {
+		7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/xcode-actions/CLTLogger.git";
+			repositoryURL = "https://github.com/xcode-actions/clt-logger.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.1;
+				minimumVersion = "1.0.0-rc";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1531,6 +1556,11 @@
 			package = 7B588825234F885E0038466E /* XCRemoteSwiftPackageReference "XibLoc" */;
 			productName = XibLoc;
 		};
+		7B641D572E5761200051D351 /* AsyncOperations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */;
+			productName = AsyncOperations;
+		};
 		7B88B9D4247FD65300D48975 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
@@ -1538,12 +1568,12 @@
 		};
 		7BC88C942A01505600230389 /* CLTLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */;
+			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */;
 			productName = CLTLogger;
 		};
 		7BC88C962A01506700230389 /* CLTLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */;
+			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */;
 			productName = CLTLogger;
 		};
 /* End XCSwiftPackageProductDependency section */

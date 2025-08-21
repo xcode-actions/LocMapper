@@ -11,11 +11,12 @@ import Foundation
 import os.log
 #endif
 
+import GlobalConfModule
 import Logging
 
 
 
-public class LocValueTransformer : CustomStringConvertible {
+open class LocValueTransformer : CustomStringConvertible {
 	
 	class var serializedType: String {
 		fatalError("serializedType is abstract.")

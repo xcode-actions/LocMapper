@@ -7,10 +7,11 @@
  */
 
 import Cocoa
+import UniformTypeIdentifiers
 
 
 
-class FilesListViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate, BecameFirstResponderTextFieldDelegate {
+final class FilesListViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate, BecameFirstResponderTextFieldDelegate {
 	
 	@IBOutlet var tableView: NSTableView!
 	@IBOutlet var buttonAddFile: NSButton!
@@ -99,7 +100,11 @@ class FilesListViewController : NSViewController, NSTableViewDataSource, NSTable
 		let openPanel = NSOpenPanel()
 		
 		openPanel.canChooseFiles = true
-		openPanel.allowedFileTypes = ["lcm"]
+		if #available(macOS 11, *) {
+			openPanel.allowedContentTypes = [UTType("com.xcode-actions.LocMapper.LocFile")!]
+		} else {
+			openPanel.allowedFileTypes = ["lcm"]
+		}
 		openPanel.canChooseDirectories = false
 		
 		openPanel.beginSheetModal(for: view.window!, completionHandler: { response in
@@ -145,7 +150,7 @@ class FilesListViewController : NSViewController, NSTableViewDataSource, NSTable
 		let row = tableView.row(for: textField) /* Note: O(n)… */
 		guard row >= 0 else {return}
 		
-		filesDescriptions[row].nickname = textField.stringValue
+		filesDescriptions[row] = filesDescriptions[row].withNickname(textField.stringValue)
 		saveFileList()
 	}
 	
@@ -154,7 +159,7 @@ class FilesListViewController : NSViewController, NSTableViewDataSource, NSTable
 		let row = tableView.row(for: menuButton) /* Note: O(n)… */
 		guard row >= 0 else {return}
 		
-		filesDescriptions[row].refLocType = InputFileDescription.RefLocType(rawValue: menuButton.selectedTag()) ?? .xibRefLoc
+		filesDescriptions[row] = filesDescriptions[row].withRefLocType(.init(rawValue: menuButton.selectedTag()) ?? .xibRefLoc)
 		saveFileList()
 	}
 	
