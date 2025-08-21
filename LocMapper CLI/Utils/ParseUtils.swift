@@ -49,7 +49,18 @@ func dictionaryOptionFromArray(_ array: [String], allowEmpty: Bool = false) thro
 }
 
 
-extension LocFile.MergeStyle : ExpressibleByArgument {
+/* Regarding the retroactive conformance:
+ * The @retroactive annotation is needed (warning) when compiling from the xcodeproj, but cannot be set when compiling from the SPM project.
+ * That’s because the MergeStyle enum is defined in the same package, but in another target.
+ * For some reason in an Xcode project the compiler does not care it’s from the same project,
+ *  so it warns the retroactive conformance should be declared. */
+#if BUILDING_FROM_XCODEPROJ
+extension LocFile.MergeStyle : @retroactive ExpressibleByArgument {}
+#else
+extension LocFile.MergeStyle : ExpressibleByArgument {}
+#endif
+
+extension LocFile.MergeStyle /* : ExpressibleByArgument */ {
 	
 	public init?(argument: String) {
 		switch argument {
