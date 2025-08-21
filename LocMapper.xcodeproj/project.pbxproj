@@ -1131,6 +1131,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapper-Linter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1153,6 +1154,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcode-actions.LocMapper-Linter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
