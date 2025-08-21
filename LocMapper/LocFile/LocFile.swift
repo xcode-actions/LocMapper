@@ -45,13 +45,13 @@ public class LocFile {
 	   ******************** */
 	
 	/* *** Init *** */
-	init(languages l: [String], entries e: [LineKey: LineValue], metadata md: Any?, csvSeparator csvSep: String, serializationStyle ss: SerializationStyle) {
+	init(languages l: [String], entries e: [LineKey: LineValue], metadata md: [String: String]?, csvSeparator csvSep: String, serializationStyle ss: SerializationStyle) {
 		if csvSep.utf16.count != 1 {fatalError("Cannot use \"\(csvSep)\" as a CSV separator")}
 		serializationStyle = ss
 		csvSeparator = csvSep
 		languages = l
 		entries = e
-		metadata = md as? [String: String] ?? [:]
+		metadata = md ?? [:]
 	}
 	
 	public convenience init(csvSeparator csvSep: String = ",") {

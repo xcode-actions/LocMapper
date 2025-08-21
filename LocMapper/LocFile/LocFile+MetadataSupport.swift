@@ -72,7 +72,7 @@ extension LocFile {
 	
 	/**
 	 Unserialize the given metadata. Should be used when initing an instance of `LocFile`. */
-	public static func unserializedMetadata(from serializedMetadata: Data) -> Any? {
+	public static func unserializedMetadata(from serializedMetadata: Data) -> [String: String]? {
 		guard let strSerializedMetadata = String(data: serializedMetadata, encoding: .utf8) else {return nil}
 		
 		let (string, decodedMetadata) = strSerializedMetadata.splitPrependedUserInfo()
