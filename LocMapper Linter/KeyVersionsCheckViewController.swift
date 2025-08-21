@@ -199,7 +199,7 @@ final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSo
 	
 	private func prepareFiles() {
 		var latestError: Error?
-		let operations = filesDescriptions.map{ (fileDescription: InputFileDescription) in
+		let operations = filesDescriptions.map{ fileDescription in
 			return BlockOperation{
 				do {
 					let locFile = try LocFile(fromPath: fileDescription.url.path, withCSVSeparator: ",")

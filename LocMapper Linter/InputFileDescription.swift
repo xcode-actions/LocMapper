@@ -64,7 +64,7 @@ final class InputFileDescription : NSObject, NSSecureCoding {
 		return url.path + ":" + String(refLocType.rawValue)
 	}
 	
-	static func == (lhs: InputFileDescription, rhs: InputFileDescription) -> Bool {
+	static func ==(lhs: InputFileDescription, rhs: InputFileDescription) -> Bool {
 		return (
 			lhs.url        == rhs.url &&
 			lhs.refLocType == rhs.refLocType
