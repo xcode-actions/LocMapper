@@ -12,7 +12,7 @@ import XibLoc
 
 
 
-class LocValueTransformerPluralVariantPick : LocValueTransformer {
+final class LocValueTransformerPluralVariantPick : LocValueTransformer {
 	
 	override class var serializedType: String {return "plural_variant_pick"}
 	

@@ -11,7 +11,7 @@ import Foundation
 
 
 
-class PreferencesViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+final class PreferencesViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	
 	static var accessToken: String {
 		return (try? Keychain.getStoredData(withIdentifier: "Lokalise Access Token").flatMap{ String(data: $0, encoding: .utf8) } ?? "") ?? ""

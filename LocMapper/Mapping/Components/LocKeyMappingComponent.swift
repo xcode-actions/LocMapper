@@ -16,7 +16,7 @@ import Logging
 
 
 
-public class LocKeyMappingComponent {
+open class LocKeyMappingComponent {
 	
 	class var serializedType: String {
 		fatalError("serializedType is abstract.")

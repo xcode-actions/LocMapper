@@ -11,7 +11,7 @@ import XibLoc
 
 
 
-class LocValueTransformerOrderedReplacementVariantPick : LocValueTransformer {
+final class LocValueTransformerOrderedReplacementVariantPick : LocValueTransformer {
 	
 	override class var serializedType: String {return "ordered_replacement_pick"}
 	

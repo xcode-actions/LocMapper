@@ -10,7 +10,7 @@ import Cocoa
 
 
 
-class FilesListViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate, BecameFirstResponderTextFieldDelegate {
+final class FilesListViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate, BecameFirstResponderTextFieldDelegate {
 	
 	@IBOutlet var tableView: NSTableView!
 	@IBOutlet var buttonAddFile: NSButton!

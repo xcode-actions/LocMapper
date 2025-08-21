@@ -18,7 +18,7 @@ protocol BecameFirstResponderTextFieldDelegate : NSTextFieldDelegate {
 }
 
 /* Would be great to have an extender for that… */
-class BecameFirstResponderTextField : NSTextField {
+final class BecameFirstResponderTextField : NSTextField {
 	
 	override func becomeFirstResponder() -> Bool {
 		let r = super.becomeFirstResponder()

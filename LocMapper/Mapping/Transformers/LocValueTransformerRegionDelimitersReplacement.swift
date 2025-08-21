@@ -11,7 +11,7 @@ import XibLoc
 
 
 
-class LocValueTransformerRegionDelimitersReplacement : LocValueTransformer {
+final class LocValueTransformerRegionDelimitersReplacement : LocValueTransformer {
 	
 	override class var serializedType: String {return "region_delimiters_replacement"}
 	

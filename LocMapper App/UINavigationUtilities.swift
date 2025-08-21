@@ -16,7 +16,7 @@ private extension NSNib.Name {
 	
 }
 
-class UINavigationUtilities {
+final class UINavigationUtilities {
 	
 	@MainActor
 	static func createLoadingWindow() -> NSWindow {

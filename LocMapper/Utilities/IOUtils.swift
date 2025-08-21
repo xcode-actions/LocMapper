@@ -34,7 +34,7 @@ func writeText(_ text: String, toFile filePath: String, usingEncoding encoding: 
 }
 
 
-class FileHandleOutputStream : TextOutputStream {
+final class FileHandleOutputStream : TextOutputStream {
 	
 	let closeOnDeinit: Bool
 	let fileHandle: FileHandle

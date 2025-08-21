@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class ImportKeyStructurePanelController : NSViewController, NSTokenFieldDelegate {
+final class ImportKeyStructurePanelController : NSViewController, NSTokenFieldDelegate {
 	
 	enum ImportType: Int {
 		case Xcode = 1

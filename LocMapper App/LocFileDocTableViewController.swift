@@ -339,7 +339,7 @@ final class LocFileDocTableViewController : NSViewController, NSUserInterfaceVal
 	
 }
 
-class HighlightColorTextFieldCell : NSTextFieldCell {
+final class HighlightColorTextFieldCell : NSTextFieldCell {
 	
 	var hightlightColor: NSColor? {
 		didSet {

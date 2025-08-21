@@ -14,7 +14,7 @@ import LocMapper
 
 private struct NotFinishedError : Error {}
 
-class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	
 	@IBOutlet var progressIndicatorFirstLoad: NSProgressIndicator!
 	@IBOutlet var progressIndicatorReload: NSProgressIndicator!

@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class InputFileDescription : NSObject, NSSecureCoding {
+final class InputFileDescription : NSObject, NSSecureCoding {
 	
 	static let supportsSecureCoding: Bool = true
 	

@@ -12,7 +12,7 @@ import XibLoc
 
 
 /* This is actually a specialization of LocValueTransformerOrderedReplacementVariantPick */
-class LocValueTransformerGenderVariantPick : LocValueTransformer {
+final class LocValueTransformerGenderVariantPick : LocValueTransformer {
 	
 	override class var serializedType: String {return "gender_variant_pick"}
 	

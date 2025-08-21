@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocEntryMappingViewController: NSViewController, NSComboBoxDataSource, NSComboBoxDelegate, NSTextDelegate {
+final class LocEntryMappingViewController: NSViewController, NSComboBoxDataSource, NSComboBoxDelegate, NSTextDelegate {
 	
 	private(set) var dirty = false {
 		didSet {

@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocKeyMappingComponentStdToXibLoc : LocKeyMappingComponent {
+final class LocKeyMappingComponentStdToXibLoc : LocKeyMappingComponent {
 	
 	override class var serializedType: String {return "std2xib"}
 	

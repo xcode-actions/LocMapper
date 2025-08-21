@@ -42,7 +42,7 @@ private extension String {
 	
 }
 
-public class AndroidXMLLocFile: TextOutputStreamable {
+public final class AndroidXMLLocFile: TextOutputStreamable {
 	
 	let filepath: String
 	let components: [AndroidLocComponent]

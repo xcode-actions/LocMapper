@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class LocValueTransformerRegexReplacements : LocValueTransformer {
+final class LocValueTransformerRegexReplacements : LocValueTransformer {
 	
 	override class var serializedType: String {return "regex_replacements"}
 	

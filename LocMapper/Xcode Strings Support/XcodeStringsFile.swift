@@ -36,7 +36,7 @@ protocol XcodeStringsComponent {
 	
 }
 
-public class XcodeStringsFile: TextOutputStreamable {
+public final class XcodeStringsFile: TextOutputStreamable {
 	
 	let filepath: String
 	let components: [XcodeStringsComponent]

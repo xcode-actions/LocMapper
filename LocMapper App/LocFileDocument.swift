@@ -32,7 +32,7 @@ private extension NSNib.Name {
 	
 }
 
-class LocFileDocument : NSDocument, NSTokenFieldDelegate {
+final class LocFileDocument : NSDocument, NSTokenFieldDelegate {
 	
 	/** If nil, the file is loading. */
 	var csvLocFile: LocFile? {

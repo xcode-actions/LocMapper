@@ -12,7 +12,7 @@ import LocMapper
 
 
 
-class LocEntryAdvancedMappingViewController : NSViewController, NSTextDelegate {
+final class LocEntryAdvancedMappingViewController : NSViewController, NSTextDelegate {
 	
 	private(set) var dirty = false {
 		didSet {
