@@ -245,7 +245,7 @@ final class LocFileDocument : NSDocument, NSTokenFieldDelegate {
 		openPanel.beginSheetModal(for: windowForSheet!){ response in
 			assert(Thread.isMainThread)
 			
-			openPanel.accessoryView = nil /* Fixes a crash... (macOS 10.12 (16A239j) */
+			openPanel.accessoryView = nil /* Fixes a crash… (macOS 10.12 (16A239j) */
 			self.currentOpenPanel = nil
 			
 			guard response == .OK else {return}

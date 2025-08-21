@@ -32,7 +32,7 @@ final class LocEntryAdvancedMappingViewController : NSViewController, NSTextDele
 		textViewMapping.font = textViewMapping.font
 		textViewMapping.string = ""
 		
-		/* Apparently not read from xib... */
+		/* Apparently not read from xib… */
 		textViewMapping.isAutomaticSpellingCorrectionEnabled = false
 		textViewMapping.isAutomaticQuoteSubstitutionEnabled = false
 		textViewMapping.isAutomaticDashSubstitutionEnabled = false

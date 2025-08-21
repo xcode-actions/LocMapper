@@ -32,7 +32,7 @@ private extension String {
 		v = v.replacingOccurrences(of: "&",  with: "&amp;",  options: .literal)
 //		v = v.replacingOccurrences(of: "'",  with: "&apos;", options: .literal)
 		v = v.replacingOccurrences(of: "<",  with: "&lt;",   options: .literal)
-		v = v.replacingOccurrences(of: ">",  with: "&gt;",   options: .literal) /* Shouldn't be needed... */
+		v = v.replacingOccurrences(of: ">",  with: "&gt;",   options: .literal) /* Shouldn't be needed… */
 //		v = v.replacingOccurrences(of: "\"", with: "&quot;", options: .literal)
 		return v
 	}
@@ -383,9 +383,9 @@ public final class AndroidXMLLocFile: TextOutputStreamable {
 						case .inPlurals(let pluralsName):
 							if currentPluralValues![quantity] != nil {
 #if canImport(os)
-								Conf.oslog.flatMap{ os_log("Got more than one value for quantity %{public}@ of plurals named %{public}@... Choosing the latest one found.", log: $0, type: .info, quantity, pluralsName) }
+								Conf.oslog.flatMap{ os_log("Got more than one value for quantity %{public}@ of plurals named %{public}@… Choosing the latest one found.", log: $0, type: .info, quantity, pluralsName) }
 #endif
-								Conf.logger?.warning("Got more than one value for quantity \(quantity) of plurals named \(pluralsName)... Choosing the latest one found.")
+								Conf.logger?.warning("Got more than one value for quantity \(quantity) of plurals named \(pluralsName)… Choosing the latest one found.")
 							}
 							currentPluralValues![quantity] = (
 								currentPluralSpaces,

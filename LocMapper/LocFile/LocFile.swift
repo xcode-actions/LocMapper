@@ -16,7 +16,7 @@ import Logging
 
 
 
-/* Note: Should probably be a struct... */
+/* Note: Should probably be a struct… */
 public final class LocFile {
 	
 	internal var metadata: [String: String]
