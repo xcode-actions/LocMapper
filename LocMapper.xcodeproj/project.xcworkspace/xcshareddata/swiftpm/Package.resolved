@@ -1,6 +1,15 @@
 {
-  "originHash" : "e3750497d109f0f85c241e40af83eb86d0770123d94d89b63778139c642e2ef6",
+  "originHash" : "b5159af7b9d221e4d4b5712e7e34518a2a31e795ba11f9bb05e6f7a68f514533",
   "pins" : [
+    {
+      "identity" : "asyncoperations",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Frizlab/AsyncOperations.git",
+      "state" : {
+        "revision" : "a4abbc7b46cb86f805e07dce9fff9b43911ee3f8",
+        "version" : "0.1.0"
+      }
+    },
     {
       "identity" : "cltlogger",
       "kind" : "remoteSourceControl",
@@ -17,6 +26,15 @@
       "state" : {
         "revision" : "72729262a37078faa9978c2c5accd5adbaedb4ee",
         "version" : "0.4.3"
+      }
+    },
+    {
+      "identity" : "retryingoperation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/happn-tech/RetryingOperation.git",
+      "state" : {
+        "revision" : "c64f98966916fc184f7575dd97e2eba9962a3d33",
+        "version" : "1.1.8"
       }
     },
     {

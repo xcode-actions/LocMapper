@@ -48,6 +48,7 @@
 		7B588827234F885E0038466E /* XibLoc in Frameworks */ = {isa = PBXBuildFile; productRef = 7B588826234F885E0038466E /* XibLoc */; };
 		7B58882B234F89430038466E /* XibLoc in Frameworks */ = {isa = PBXBuildFile; productRef = 7B58882A234F89430038466E /* XibLoc */; };
 		7B637D241C16DFC900C4BD7C /* LocFileDocContentSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B637D231C16DFC900C4BD7C /* LocFileDocContentSplitViewController.swift */; };
+		7B641D582E5761200051D351 /* AsyncOperations in Frameworks */ = {isa = PBXBuildFile; productRef = 7B641D572E5761200051D351 /* AsyncOperations */; };
 		7B6DBEDA21CC5B07007BBCE9 /* ColorFixedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6DBED921CC5B07007BBCE9 /* ColorFixedTextFieldCell.swift */; };
 		7B6E25A319D4157A001934ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E25A219D4157A001934ED /* main.swift */; };
 		7B6F19AB2576AB8700DB6F19 /* LokaliseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F19AA2576AB8700DB6F19 /* LokaliseKey.swift */; };
@@ -294,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B641D582E5761200051D351 /* AsyncOperations in Frameworks */,
 				7B0ACEFE21C30CD6003705A8 /* libLocMapper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,6 +757,7 @@
 			);
 			name = "LocMapper Linter";
 			packageProductDependencies = (
+				7B641D572E5761200051D351 /* AsyncOperations */,
 			);
 			productName = "LocMapper Linter";
 			productReference = 7B15CE1C21C120310016D109 /* LocMapper Linter.app */;
@@ -892,6 +895,7 @@
 			);
 			mainGroup = 7B6E259619D4157A001934ED;
 			packageReferences = (
+				7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */,
 				7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */,
 				7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				7B11B558246B179100257726 /* XCRemoteSwiftPackageReference "swift-log" */,
@@ -1499,6 +1503,14 @@
 				minimumVersion = "1.5.1-beta";
 			};
 		};
+		7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Frizlab/AsyncOperations.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
@@ -1532,6 +1544,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B588825234F885E0038466E /* XCRemoteSwiftPackageReference "XibLoc" */;
 			productName = XibLoc;
+		};
+		7B641D572E5761200051D351 /* AsyncOperations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */;
+			productName = AsyncOperations;
 		};
 		7B88B9D4247FD65300D48975 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;

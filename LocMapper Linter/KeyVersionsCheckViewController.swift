@@ -8,6 +8,8 @@
 
 import AppKit
 
+import AsyncOperations
+
 import LocMapper
 
 
@@ -202,22 +204,24 @@ final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSo
 	private func prepareFiles() {
 		var latestError: Error?
 		let operations = filesDescriptions.map{ fileDescription in
-			return BlockOperation{
+			return AsyncBlockOperation{ @MainActor in
 				do {
-					let locFile = try LocFile(fromPath: fileDescription.url.path, withCSVSeparator: ",")
-					let simplifiedReferencedKeys = Set(locFile.untaggedKeysReferencedInMappings.map{
-						$0.locKey
-					})
+					let simplifiedReferencedKeys = try await Task{
+						let locFile = try LocFile(fromPath: fileDescription.url.path, withCSVSeparator: ",")
+						return Set(locFile.untaggedKeysReferencedInMappings.map{
+							$0.locKey
+						})
+					}.value
 					
 					/* We change locFiles on the main thread to avoid concurrency problems. */
-					DispatchQueue.main.sync{ self.simplifiedUntaggedKeysReferencedInMappingsByFile[fileDescription] = simplifiedReferencedKeys }
+					self.simplifiedUntaggedKeysReferencedInMappingsByFile[fileDescription] = simplifiedReferencedKeys
 				} catch {
 					latestError = error
 				}
 			}
 		}
-		let endOperation = BlockOperation{
-			if let error = latestError {DispatchQueue.main.async{ self.showErrorAndBail(error) }}
+		let endOperation = AsyncBlockOperation{ @MainActor in
+			if let error = latestError {self.showErrorAndBail(error)}
 			else                       {self.computeResults()}
 		}
 		operations.forEach{ endOperation.addDependency($0) }
@@ -226,55 +230,64 @@ final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSo
 	}
 	
 	private func computeResults() {
-		queue.addOperation{
-			var reports = [Report]()
-			for (_, versions) in self.simplifiedGroupedOctothorpedUntaggedRefLocKeys {
-				/* First filter on version count. */
-				guard self.alsoShowOneVersionKeys || versions.count > 1 else {
-					continue
-				}
-				
-				let latestVersion = versions.last!
-				var mapped = [String: String]()
-				/* Let's find which key is mapped (if any) for each input files. */
-				for file in self.filesDescriptions {
-					let referencedKeys = self.simplifiedUntaggedKeysReferencedInMappingsByFile[file]!
-					for version in versions.reversed() {
-						if referencedKeys.contains(version) {
-							mapped[file.stringHash] = version
+		queue.addAsyncBlock{ @MainActor in
+			let newReports = await Task.detached{ [
+				simplifiedGroupedOctothorpedUntaggedRefLocKeys = self.simplifiedGroupedOctothorpedUntaggedRefLocKeys!,
+				alsoShowOneVersionKeys = self.alsoShowOneVersionKeys,
+				filesDescriptions = self.filesDescriptions!,
+				simplifiedUntaggedKeysReferencedInMappingsByFile = self.simplifiedUntaggedKeysReferencedInMappingsByFile!,
+				showUnmapped = self.showUnmapped,
+				showNotLatestVersion = self.showNotLatestVersion,
+				showMappedLatest = self.showMappedLatest
+			] in
+				var reports = [Report]()
+				for (_, versions) in simplifiedGroupedOctothorpedUntaggedRefLocKeys {
+					/* First filter on version count. */
+					guard alsoShowOneVersionKeys || versions.count > 1 else {
+						continue
+					}
+					
+					let latestVersion = versions.last!
+					var mapped = [String: String]()
+					/* Let's find which key is mapped (if any) for each input files. */
+					for file in filesDescriptions {
+						let referencedKeys = simplifiedUntaggedKeysReferencedInMappingsByFile[file]!
+						for version in versions.reversed() {
+							if referencedKeys.contains(version) {
+								mapped[file.stringHash] = version
+							}
 						}
 					}
+					/* Let’s apply the remaining filters. */
+					let shouldAppend = (
+						(showUnmapped && mapped.count < filesDescriptions.count) ||
+						(showNotLatestVersion && Set(mapped.values).subtracting([latestVersion]).count > 0) ||
+						(showMappedLatest && mapped.count == filesDescriptions.count && Set(mapped.values) == Set(arrayLiteral: latestVersion))
+					)
+					if shouldAppend {
+						reports.append(.versionReport(latestRefLocKey: latestVersion, mappedKeys: mapped))
+					}
 				}
-				/* Let’s apply the remaining filters. */
-				let shouldAppend = (
-					(self.showUnmapped && mapped.count < self.filesDescriptions.count) ||
-					(self.showNotLatestVersion && Set(mapped.values).subtracting([latestVersion]).count > 0) ||
-					(self.showMappedLatest && mapped.count == self.filesDescriptions.count && Set(mapped.values) == Set(arrayLiteral: latestVersion))
-				)
-				if shouldAppend {
-					reports.append(.versionReport(latestRefLocKey: latestVersion, mappedKeys: mapped))
+				reports.sort{
+					switch ($0, $1) {
+						case (.versionReport(latestRefLocKey: let k1, mappedKeys: _), .versionReport(latestRefLocKey: let k2, mappedKeys: _)):
+							return k1 < k2
+					}
 				}
-			}
-			reports.sort{
-				switch ($0, $1) {
-					case (.versionReport(latestRefLocKey: let k1, mappedKeys: _), .versionReport(latestRefLocKey: let k2, mappedKeys: _)):
-						return k1 < k2
-				}
-			}
+				return reports
+			}.value
 			
-			DispatchQueue.main.async{
-				assert(self.loadingState.isLoading)
-				self.loadingState = .notLoading
-				
-				self.reports = reports
-				self.tableView.reloadData()
-				self.progressIndicatorFirstLoad.stopAnimation(nil)
-				
-				if self.needsReload {
-					self.reloadOrQueueReload()
-				} else {
-					self.progressIndicatorReload.stopAnimation(nil)
-				}
+			assert(self.loadingState.isLoading)
+			self.loadingState = .notLoading
+			
+			self.reports = newReports
+			self.tableView.reloadData()
+			self.progressIndicatorFirstLoad.stopAnimation(nil)
+			
+			if self.needsReload {
+				self.reloadOrQueueReload()
+			} else {
+				self.progressIndicatorReload.stopAnimation(nil)
 			}
 		}
 	}
