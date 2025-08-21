@@ -13,20 +13,20 @@ import Foundation
 
 final class PreferencesViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	
-	static var accessToken: String {
+	static nonisolated var accessToken: String {
 		return (try? Keychain.getStoredData(withIdentifier: "Lokalise Access Token").flatMap{ String(data: $0, encoding: .utf8) } ?? "") ?? ""
 	}
 	
-	static var projectId: String {
+	static nonisolated var projectId: String {
 		return UserDefaults.standard.string(forKey: "LokaliseProjectId") ?? ""
 	}
 	
-	static var excludedTags: Set<String> {
+	static nonisolated var excludedTags: Set<String> {
 		return Set(UserDefaults.standard.array(forKey: "ExcludedTags") as? [String] ?? [])
 	}
 	
 	/* Lokalise to LocMapper language name mapping */
-	static var languagesNameMappings: [String: String] {
+	static nonisolated var languagesNameMappings: [String: String] {
 		var ret = [String: String]()
 		for e in udLanguagesNameMappings {
 			ret[e["lokaliseName"] ?? "unknown"] = e["locmapperName"] ?? "unknown"
@@ -104,7 +104,7 @@ final class PreferencesViewController : NSViewController, NSTableViewDataSource,
 	   MARK: - Private
 	   *************** */
 	
-	private static var udLanguagesNameMappings: [[String: String]] {
+	private nonisolated static var udLanguagesNameMappings: [[String: String]] {
 		get {return UserDefaults.standard.array(forKey: "LanguagesMapping") as? [[String: String]] ?? []}
 		set {
 			let sorted = newValue.sorted(by: {

@@ -162,7 +162,7 @@ final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSo
 	
 	private func getStdRefLoc() {
 		queue.addOperation{
-			assert(self.simplifiedGroupedOctothorpedUntaggedRefLocKeys == nil)
+			DispatchQueue.main.sync{ assert(self.simplifiedGroupedOctothorpedUntaggedRefLocKeys == nil) }
 			do {
 				/* We use iOS key type.
 				 * AFAIK iOS and android keys are the same and this should not change. */
@@ -187,8 +187,10 @@ final class KeyVersionsCheckViewController : NSViewController, NSTableViewDataSo
 					return
 				}
 				
-				self.simplifiedGroupedOctothorpedUntaggedRefLocKeys = simplifiedXibGroupedOctothorpedUntaggedRefLocKeys
-				self.prepareFiles()
+				DispatchQueue.main.sync{
+					self.simplifiedGroupedOctothorpedUntaggedRefLocKeys = simplifiedXibGroupedOctothorpedUntaggedRefLocKeys
+					self.prepareFiles()
+				}
 			} catch {
 				DispatchQueue.main.async{
 					self.showErrorAndBail(error)
