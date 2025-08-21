@@ -100,7 +100,11 @@ final class FilesListViewController : NSViewController, NSTableViewDataSource, N
 		let openPanel = NSOpenPanel()
 		
 		openPanel.canChooseFiles = true
-		openPanel.allowedContentTypes = [UTType("com.xcode-actions.LocMapper.LocFile")!]
+		if #available(macOS 11, *) {
+			openPanel.allowedContentTypes = [UTType("com.xcode-actions.LocMapper.LocFile")!]
+		} else {
+			openPanel.allowedFileTypes = ["lcm"]
+		}
 		openPanel.canChooseDirectories = false
 		
 		openPanel.beginSheetModal(for: view.window!, completionHandler: { response in
