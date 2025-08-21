@@ -131,7 +131,7 @@ final class LocFileDocTableViewController : NSViewController, NSUserInterfaceVal
 		guard let strValue = object as? String else {return}
 		_ = csvLocFile.setValue(strValue, forKey: key, withLanguage: tableColumn.identifier.rawValue)
 		
-		DispatchQueue.main.async {
+		DispatchQueue.main.async{
 			self.handlerNotifyDocumentModification?()
 			
 			tableView.beginUpdates()

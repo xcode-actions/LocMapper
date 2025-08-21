@@ -206,9 +206,9 @@ final class LocFileDocument : NSDocument, NSTokenFieldDelegate {
 			self.windowForSheet?.beginSheet(loadingWindow, completionHandler: nil)
 			
 			let languages = tokenField.stringValue.split(separator: ",").map(String.init)
-			DispatchQueue.global().async {
+			DispatchQueue.global().async{
 				defer {
-					DispatchQueue.main.async {
+					DispatchQueue.main.async{
 						self.mainViewController.noteContentHasChanged()
 						self.windowForSheet?.endSheet(loadingWindow)
 						self.updateChangeCount(.changeDone)
@@ -219,7 +219,7 @@ final class LocFileDocument : NSDocument, NSTokenFieldDelegate {
 					let referenceTranslations = try XibRefLocFile(fromURL: url, languages: languages, csvSeparator: ",")
 					csvLocFile.mergeRefLocsWithXibRefLocFile(referenceTranslations, mergeStyle: .add)
 				} catch let error {
-					DispatchQueue.main.async {
+					DispatchQueue.main.async{
 						NSAlert(error: error as NSError).beginSheetModal(for: self.windowForSheet!, completionHandler: nil)
 					}
 				}
