@@ -1,13 +1,13 @@
 {
-  "originHash" : "76c7ac527971b73927b1fba22bb75a9d00cf60becc422411e3e4093acef02426",
+  "originHash" : "631ce928212a3fa09e60ca37ba3374087fc6481f5cce8ed20576e2b73f166a05",
   "pins" : [
     {
-      "identity" : "cltlogger",
+      "identity" : "clt-logger",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/xcode-actions/CLTLogger.git",
+      "location" : "https://github.com/xcode-actions/clt-logger.git",
       "state" : {
-        "revision" : "d2d2be799fde3e564f6f2c35b708403bf609a0fb",
-        "version" : "0.9.0"
+        "revision" : "43d4e20e764468bc8dbc1d503f0eb38d08ee971f",
+        "version" : "1.0.0-rc.1"
       }
     },
     {

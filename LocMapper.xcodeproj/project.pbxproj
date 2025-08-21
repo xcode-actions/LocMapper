@@ -896,7 +896,7 @@
 			mainGroup = 7B6E259619D4157A001934ED;
 			packageReferences = (
 				7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */,
-				7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */,
+				7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */,
 				7B88B9D3247FD65300D48975 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				7B11B558246B179100257726 /* XCRemoteSwiftPackageReference "swift-log" */,
 				7B588825234F885E0038466E /* XCRemoteSwiftPackageReference "XibLoc" */,
@@ -1530,12 +1530,12 @@
 				minimumVersion = 1.6.1;
 			};
 		};
-		7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */ = {
+		7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/xcode-actions/CLTLogger.git";
+			repositoryURL = "https://github.com/xcode-actions/clt-logger.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.1;
+				minimumVersion = "1.0.0-rc";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1568,12 +1568,12 @@
 		};
 		7BC88C942A01505600230389 /* CLTLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */;
+			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */;
 			productName = CLTLogger;
 		};
 		7BC88C962A01506700230389 /* CLTLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "CLTLogger" */;
+			package = 7BC88C932A01505600230389 /* XCRemoteSwiftPackageReference "clt-logger" */;
 			productName = CLTLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
