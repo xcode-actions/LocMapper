@@ -87,8 +87,8 @@ struct UpdateXcodeStringsFromCode : ParsableCommand {
 	var rootFolder: String
 	
 	@Argument(help: #"""
-		When using genstrings in UIKit/AppKit mode, will pass “MY_TABLE MyTable” (two arguments) to convert `NSLocalizedString("MyString", tableName: MY_TABLE, comment: "This comment!")` into `NSLocalizedString("MyString", tableName: "MyTable", comment: "This comment!")` for instance.
-		When using genstrings in SwiftUI mode, will do the same but the replacement will not be quoted (e.g. with “MyText Text”, `MyText("loc-key")` will be replaced by `Text("loc-key")`).
+		When using genstrings in UIKit/AppKit mode, passing e.g. “MY_TABLE MyTable” (two arguments) will convert `NSLocalizedString("MyString", tableName: MY_TABLE, comment: "This comment!")` into `NSLocalizedString("MyString", tableName: "MyTable", comment: "This comment!")`.
+		When using genstrings in SwiftUI mode, the same is done, but the replacement will not be quoted (e.g. with “MyText Text”, `MyText("loc-key")` will be replaced by `Text("loc-key")`).
 		"""#)
 	var tableDefinesToValuesMapping = [String]()
 	
