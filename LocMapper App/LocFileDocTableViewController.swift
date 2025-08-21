@@ -28,7 +28,10 @@ final class LocFileDocTableViewController : NSViewController, NSUserInterfaceVal
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		createTableViewColumnsIfNeeded(reloadData: true)
+		/* <https://www.massicotte.org/awakefromnib> */
+		MainActor.assumeIsolated{
+			createTableViewColumnsIfNeeded(reloadData: true)
+		}
 	}
 	
 	/* *********************************************************************

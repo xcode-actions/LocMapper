@@ -16,7 +16,11 @@ final class LoadingDocViewController : NSViewController {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		activityIndicator.startAnimation(nil)
+		
+		/* <https://www.massicotte.org/awakefromnib> */
+		MainActor.assumeIsolated{
+			activityIndicator.startAnimation(nil)
+		}
 	}
 	
 	/* *******************************************
