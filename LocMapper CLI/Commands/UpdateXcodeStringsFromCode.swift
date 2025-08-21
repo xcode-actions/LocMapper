@@ -87,7 +87,10 @@ struct UpdateXcodeStringsFromCode : ParsableCommand {
 	@Argument
 	var rootFolder: String
 	
-	@Argument(help: #"Pass “MY_TABLE MyTable” (two arguments) to convert `NSLocalizedString("MyString", tableName: MY_TABLE, comment: "This comment!")` into `NSLocalizedString("MyString", tableName: "MyTable", comment: "This comment!")` for instance."#)
+	@Argument(help: #"""
+		When using genstrings in UIKit/AppKit mode, passing e.g. “MY_TABLE MyTable” (two arguments) will convert `NSLocalizedString("MyString", tableName: MY_TABLE, comment: "This comment!")` into `NSLocalizedString("MyString", tableName: "MyTable", comment: "This comment!")`.
+		When using genstrings in SwiftUI mode, the same is done, but the replacement will not be quoted (e.g. with “MyText Text”, `MyText("loc-key")` will be replaced by `Text("loc-key")`).
+		"""#)
 	var tableDefinesToValuesMapping = [String]()
 	
 	func run() throws {
@@ -267,7 +270,18 @@ struct UpdateXcodeStringsFromCode : ParsableCommand {
 				let objcMark = (Set(arrayLiteral: "m", "mm").contains(codeURL.pathExtension) ? "@" : "")
 				var code = try String(contentsOf: codeURL)
 				for (regex, value) in regexesAndValues {
-					code = regex.stringByReplacingMatches(in: code, options: [], range: NSRange(code.startIndex..<code.endIndex, in: code), withTemplate: objcMark + "\"" + NSRegularExpression.escapedTemplate(for: value) + "\"")
+					code = regex.stringByReplacingMatches(
+						in: code,
+						options: [],
+						range: NSRange(code.startIndex..<code.endIndex, in: code),
+						withTemplate: {
+							if !swiftUI {
+								objcMark + "\"" + NSRegularExpression.escapedTemplate(for: value) + "\""
+							} else {
+								NSRegularExpression.escapedTemplate(for: value)
+							}
+						}()
+					)
 				}
 				try Data(code.utf8).write(to: codeURL)
 				codeFilePaths.append(codeURL.path)
