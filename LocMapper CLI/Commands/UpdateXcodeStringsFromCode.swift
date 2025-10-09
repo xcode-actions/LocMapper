@@ -72,6 +72,9 @@ struct UpdateXcodeStringsFromCode : ParsableCommand {
 	@Flag(help: "Enable this option to pass the -SwiftUI option to genstring.")
 	var swiftUI = false
 	
+	@Option(help: "Additional function names to recognized for detecting a translation.")
+	var additionalRoutineNames = [String]()
+	
 	@Option
 	var encoding = "utf16"
 	
@@ -296,7 +299,7 @@ struct UpdateXcodeStringsFromCode : ParsableCommand {
 			let size = 250
 			for start in stride(from: codeFilePaths.startIndex, to: codeFilePaths.endIndex, by: size) {
 				let subarray = codeFilePaths[start..<min(start + size, codeFilePaths.endIndex)]
-				let code = finishedProcess(launchPath: "/usr/bin/genstrings", arguments: (swiftUI ? ["-SwiftUI"] : []) + ["-q", "-o", temporaryGenstringsDestinationFolderURL.path] + subarray)
+				let code = finishedProcess(launchPath: "/usr/bin/genstrings", arguments: (swiftUI ? ["-SwiftUI"] : []) + (additionalRoutineNames.flatMap{ ["-s", $0] }) + ["-q", "-o", temporaryGenstringsDestinationFolderURL.path] + subarray)
 				guard code == 0 else {
 					throw UpdateError(message: "genstrings failed; not treating code locs")
 				}
