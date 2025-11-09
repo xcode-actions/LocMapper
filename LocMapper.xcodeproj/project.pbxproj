@@ -1511,7 +1511,7 @@
 			repositoryURL = "https://github.com/Frizlab/XibLoc.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "1.5.1-beta";
+				minimumVersion = 1.5.1;
 			};
 		};
 		7B641D562E5761200051D351 /* XCRemoteSwiftPackageReference "AsyncOperations" */ = {
@@ -1535,7 +1535,7 @@
 			repositoryURL = "https://github.com/xcode-actions/clt-logger.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "1.0.0-rc";
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
