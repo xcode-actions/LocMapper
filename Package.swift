@@ -15,8 +15,8 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/apple/swift-log.git",             from: "1.2.0"),
 		.package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.1"),
-		.package(url: "https://github.com/Frizlab/XibLoc.git",              from: "1.5.1-beta"),
-		.package(url: "https://github.com/xcode-actions/clt-logger.git",    from: "1.0.0-rc")
+		.package(url: "https://github.com/Frizlab/XibLoc.git",              from: "1.5.1"),
+		.package(url: "https://github.com/xcode-actions/clt-logger.git",    from: "1.0.0")
 	],
 	targets: [
 		.systemLibrary(name: "CZlib", path: "CZlib", providers: [.apt(["zlib1g-dev"])]),

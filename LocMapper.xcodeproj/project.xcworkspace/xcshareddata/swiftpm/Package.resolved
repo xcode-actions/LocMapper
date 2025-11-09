@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xcode-actions/clt-logger.git",
       "state" : {
-        "revision" : "43d4e20e764468bc8dbc1d503f0eb38d08ee971f",
-        "version" : "1.0.0-rc.1"
+        "revision" : "db7f3f71ace4e3bd316f98a52b9ee488bb2e66da",
+        "version" : "1.0.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Frizlab/GlobalConfModule.git",
       "state" : {
-        "revision" : "72729262a37078faa9978c2c5accd5adbaedb4ee",
-        "version" : "0.4.3"
+        "revision" : "1ae8f4510c375217a8423864366b68f18b986d20",
+        "version" : "0.4.4"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "309a47b2b1d9b5e991f36961c983ecec72275be3",
-        "version" : "1.6.1"
+        "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
+        "version" : "1.6.2"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
-        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
-        "version" : "601.0.1"
+        "revision" : "4799286537280063c85a32f09884cfbca301b1a1",
+        "version" : "602.0.0"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/Frizlab/XibLoc.git",
       "state" : {
         "revision" : "e85a5179bdd93e017473182d76b33af1f176e6bd",
-        "version" : "1.5.1-beta.2"
+        "version" : "1.5.1"
       }
     }
   ],

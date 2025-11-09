@@ -36,12 +36,13 @@ open class LocValueTransformer : CustomStringConvertible {
 			let c: LocValueTransformer
 			
 			switch type {
-				case LocValueTransformerSimpleStringReplacements.serializedType:    c = try LocValueTransformerSimpleStringReplacements(serialization: serialization)
-				case LocValueTransformerRegexReplacements.serializedType:           c = try LocValueTransformerRegexReplacements(serialization: serialization)
-				case LocValueTransformerToUpper.serializedType:                     c = try LocValueTransformerToUpper(serialization: serialization)
-				case LocValueTransformerGenderVariantPick.serializedType:           c = try LocValueTransformerGenderVariantPick(serialization: serialization)
-				case LocValueTransformerPluralVariantPick.serializedType:           c = try LocValueTransformerPluralVariantPick(serialization: serialization)
-				case LocValueTransformerRegionDelimitersReplacement.serializedType: c = try LocValueTransformerRegionDelimitersReplacement(serialization: serialization)
+				case LocValueTransformerGenderVariantPick.serializedType:             c = try LocValueTransformerGenderVariantPick(serialization: serialization)
+				case LocValueTransformerOrderedReplacementVariantPick.serializedType: c = try LocValueTransformerOrderedReplacementVariantPick(serialization: serialization)
+				case LocValueTransformerPluralVariantPick.serializedType:             c = try LocValueTransformerPluralVariantPick(serialization: serialization)
+				case LocValueTransformerRegexReplacements.serializedType:             c = try LocValueTransformerRegexReplacements(serialization: serialization)
+				case LocValueTransformerRegionDelimitersReplacement.serializedType:   c = try LocValueTransformerRegionDelimitersReplacement(serialization: serialization)
+				case LocValueTransformerSimpleStringReplacements.serializedType:      c = try LocValueTransformerSimpleStringReplacements(serialization: serialization)
+				case LocValueTransformerToUpper.serializedType:                       c = try LocValueTransformerToUpper(serialization: serialization)
 				default:
 					throw NSError(domain: "MigratorInternal", code: 1, userInfo: [NSLocalizedDescriptionKey: "Got invalid loc value transformer component: Unknown __type value \"\(type)\"."])
 			}
