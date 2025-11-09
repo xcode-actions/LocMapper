@@ -855,7 +855,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2610;
 				ORGANIZATIONNAME = happn;
 				TargetAttributes = {
 					7B15CE1B21C120310016D109 = {
