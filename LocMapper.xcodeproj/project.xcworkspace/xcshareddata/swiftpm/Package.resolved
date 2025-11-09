@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Frizlab/XibLoc.git",
       "state" : {
-        "revision" : "e85a5179bdd93e017473182d76b33af1f176e6bd",
-        "version" : "1.5.1"
+        "revision" : "cc7bef4f771c43c529aaf199fe1c45b908f780d3",
+        "version" : "2.0.0-beta.2"
       }
     }
   ],
