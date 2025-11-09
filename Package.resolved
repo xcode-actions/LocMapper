@@ -1,5 +1,5 @@
 {
-  "originHash" : "1de0bbf960cdb0cb9b170b85c18ad917cd30d7f83f0aada29a15ba80e55b0c45",
+  "originHash" : "8da7da86fb804a593e552c250d04f3b96504afef6a3cb8bf0e9c1e04829a7c34",
   "pins" : [
     {
       "identity" : "clt-logger",
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Frizlab/XibLoc.git",
       "state" : {
-        "revision" : "e85a5179bdd93e017473182d76b33af1f176e6bd",
-        "version" : "1.5.1"
+        "revision" : "cc7bef4f771c43c529aaf199fe1c45b908f780d3",
+        "version" : "2.0.0-beta.2"
       }
     }
   ],
